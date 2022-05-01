@@ -41,8 +41,8 @@
             <div class="col-md2"><label>Country</label></div>
             <div class="col-md9">
               <div class="input-space">
-                <select formControlName="country" type="text">
-                  <option>TO DO</option>
+                <select formControlName="country" type="text" (change)="getStates('shippingAddress')">
+                  <option *ngFor="let country of countries" [ngValue]="country"> {{country.name}}</option>
                 </select>
               </div>
             </div>
@@ -70,8 +70,8 @@
             <div class="col-md2"><label>State</label></div>
             <div class="col-md9">
               <div class="input-space">
-                <select formControlName="state" type="text">
-                  <option>TO DO</option>
+                <select formControlName="state">
+                  <option *ngFor="let state of shippingAddressStates" [ngValue]="state"> {{state.name}}</option>
                 </select>
               </div>
             </div>
@@ -105,8 +105,8 @@
             <div class="col-md2"><label>Country</label></div>
             <div class="col-md9">
               <div class="input-space">
-                <select formControlName="country" type="text">
-                  <option>TO DO</option>
+                <select formControlName="country" type="text" (change)="getStates('billingAddress')">
+                  <option *ngFor="let country of countries" [ngValue]="country"> {{country.name}}</option>
                 </select>
               </div>
             </div>
@@ -134,8 +134,8 @@
             <div class="col-md2"><label>State</label></div>
             <div class="col-md9">
               <div class="input-space">
-                <select formControlName="state" type="text">
-                  <option>TO DO</option>
+                  <select formControlName="state">
+                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state"> {{state.name}}</option>
                 </select>
               </div>
             </div>

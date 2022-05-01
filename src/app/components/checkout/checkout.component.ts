@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { Luv2ShopFormService } from 'src/app/services/luv2-shop-form.service';
 
 @Component({
@@ -13,6 +15,11 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
+  countries: Country[] = [];
+  contryCode: string;
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
+
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
 
@@ -22,6 +29,12 @@ export class CheckoutComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private luv2ShopFormService: Luv2ShopFormService) { }
 
   ngOnInit(): void {
+
+    this.luv2ShopFormService.getCountries().subscribe( data => {
+      console.log("Retrieved Countries: " + JSON.stringify(data));
+      this.countries = data;
+    });
+
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -67,6 +80,25 @@ export class CheckoutComponent implements OnInit {
       data => this.creditCardYears = data
     ); 
 
+  }
+
+  getStates(formGroupName: string){
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+    const countryCode = formGroup.value.country.code; 
+    const countryName = formGroup.value.country.name;
+
+    console.log(`{formGroupName} country code: ${countryCode} & name : ${countryName}`);
+    
+
+    this.luv2ShopFormService.getStates(countryCode).subscribe( data => {
+
+      if(formGroupName === 'shippingAddress'){
+        this.shippingAddressStates = data;
+      }else{
+        this.billingAddressStates = data;
+      }
+      formGroup.get('state').setValue(data[0]);
+    });
   }
 
   onSubmit(){
