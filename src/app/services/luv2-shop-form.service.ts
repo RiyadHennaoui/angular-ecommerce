@@ -31,7 +31,7 @@ export class Luv2ShopFormService {
     console.log(`{getStates} url for API ! ${searchStatesUrl}`);
     
 
-    return this.httpClient.get<GetResponseStates>(this.statesUrl).pipe(
+    return this.httpClient.get<GetResponseStates>(searchStatesUrl).pipe(
       map(response => response._embedded.states )
     );
 
