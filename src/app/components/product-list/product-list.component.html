@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <!-- Loop -->
-        <div *ngFor="let tempProduct of products" class="col-md-3">
+        <!-- <div *ngFor="let tempProduct of products" class="col-md-3">
           <div class="product-box">
             <a routerLink="/products/{{ tempProduct.id }}">
               <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
@@ -24,7 +24,33 @@
         >
           No products found.
         </div>
+      </div> -->
+
+      <div *ngFor="let tempProduct of products" class="card-div col-md-3">
+        <div class="card" style="width: 18rem;">
+          <a routerLink="/products/{{ tempProduct.id }}">
+            <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
+          </a>
+          <div class="card-body">
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <h5 class="card-title">{{ tempProduct.name }}</h5>
+            </a>
+            <p class="card-text">{{ tempProduct.description }}</p>
+            <div class="price">
+              {{ tempProduct.unitPrice | currency: "EUR" }}
+              <button  (click)="addToCart(tempProduct)"  class="btn btn-primary btn-sm float-end">Add to cart</button>
+            </div>
+          </div>
+        </div>
       </div>
+      <div
+        *ngIf="products?.length == 0"
+        class="alert alert-warning col-md-12"
+        role="alert"
+      >
+        No products found.
+      </div>
+    </div>
 
       <!-- begin footer -->
       

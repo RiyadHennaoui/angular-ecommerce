@@ -10,6 +10,7 @@
                         <th width="20%">Total Quantity</th>
                         <th width="20%">Date</th>
                     </tr>
+                    <tbody class="table-striped">
                     <tr *ngFor="let tempOrderHistory of orderHistoryList">
                         <td>
                             {{ tempOrderHistory.orderTrackingNumber }}
@@ -24,6 +25,7 @@
                             {{ tempOrderHistory.dateCreated | date: 'medium' }}
                         </td>
                     </tr>
+                </tbody>
                 </table>
 
             </div>

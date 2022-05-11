@@ -1,8 +1,9 @@
 <div class="menu-sidebar-content js-scrollbar1">
-  <nav class="navbar-sidebar">
+  <nav class="list-group">
     <ul class="list-unstyled navbar-list">
-      <li *ngFor="let tempProductCategory of productCategories">
+      <li *ngFor="let tempProductCategory of productCategories" class="list-group-item list-group-item-success">
         <a
+        style="text-decoration: none;"
           routerLink="/category/{{ tempProductCategory.id }}"
           routerLinkActive="active-link"
         >
